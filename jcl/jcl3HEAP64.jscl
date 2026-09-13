@@ -1,0 +1,17 @@
+//*-------------------------------------------------------------------*
+//* STEP 1: COMPILE 64-BIT COMPLIANT SOURCE (AMODE 64)
+//*-------------------------------------------------------------------*
+//COMPILE  EXEC EDCC,
+//         OUTFILE='USER.LOAD.LIB64(MATSIM64),DISP=SHR',
+//         CPARM='OPT(3),ARCH(12),TUNE(12),LP64,LONGNAME'
+//COMPILE.SYSIN DD DISP=SHR,DSN=USER.C.SRC(MATPDS)
+//*-------------------------------------------------------------------*
+//* STEP 2: RUN MATRIX ENGINE WITH 64-BIT STORAGE TRACKING
+//*-------------------------------------------------------------------*
+//RUNSIM64 EXEC PGM=MATSIM64,COND=(4,LT),
+//         PARM='RPTSTG(ON),RPTOPTS(ON),HEAP64(1M,1M,KEEP)/'
+//STEPLIB  DD DISP=SHR,DSN=USER.LOAD.LIB64
+//CEEDUMP  DD SYSOUT=*
+//CEEOUT   DD SYSOUT=*
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
